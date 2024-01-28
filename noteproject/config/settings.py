@@ -57,6 +57,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "expenditure",
+    "corsheaders",
 ]
 
 # REST_FRAMEWORK = {
@@ -77,7 +79,20 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
 ]
+
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+]
+
+CORS_ORIGIN_ALLOW_ALL = True        # 모든 출처에서의 요청 허용
+CORS_ALLOWED_CREDENTIALS = True     # 자격 증명을 허용
+
 
 ROOT_URLCONF = "config.urls"
 
