@@ -9,9 +9,9 @@ class BankAccountSerializer(serializers.ModelSerializer):
 class ExpenditureSerializer(serializers.ModelSerializer):
     class Meta:
         model = Expenditure
-        fields = ['id','date','tag','price','content','contain']
+        fields = ['id','date','tag','price','content','contain','bankAccountId']
 
 class IncomeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Income
-        fields = ['id','date','tag','price','content','contain']
+        fields = ['id','date','tag','price','content','contain','bankAccountId']
