@@ -1,8 +1,11 @@
 from django.urls import path
-from .views import RegisterView, LoginView, LogoutView
+from . import views
 
 urlpatterns = [
-    path('register/',RegisterView.as_view()),
-    path('login/',LoginView.as_view()),
-    path('logout/',LogoutView.as_view()),
+    path('register/',views.RegisterAPIView.as_view()),
+    path('auth/',views.AuthAPIView.as_view()),
 ]
+
+# GET       auth/ 유저 정보 가져오기
+# POST      auth/ 로그인
+# DELETE    auth/ 로그아웃
