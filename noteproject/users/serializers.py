@@ -11,6 +11,5 @@ class UserSerializer(serializers.ModelSerializer):
             username = validated_data['username'],
             email = validated_data['email'],
             password = validated_data['password'],
-            password2 = validated_data['password2']
         )
         return user

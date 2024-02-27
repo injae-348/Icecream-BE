@@ -1,6 +1,6 @@
 import jwt
 
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, get_user_model
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 
@@ -77,11 +77,20 @@ class AuthAPIView(APIView):
     # 로그인용
     def post(self, request):
     	# 유저 인증
-        user = authenticate(
-            email=request.data.get("email"), password=request.data.get("password")
-        )
+        # 아래 authenticate 방식의 경우 username과 password를 기반으로 작동하기에
+        # 사용중인 사용자 모델을 가져와 이메일을 기반으로 사용자를 검색하고 비밀번호를 확인하여 인증
+        email = request.data.get("email")
+        password = request.data.get("password")
+
+        User = get_user_model()
+        user = User.objects.filter(email=email).first()
+
+        # user = authenticate(
+        #     email=request.data.get("email"), password=request.data.get("password")
+        # )
+
         # 이미 회원가입 된 유저일 때
-        if user is not None:
+        if user is not None and user.check_password(password):
             serializer = UserSerializer(user)
             token = TokenObtainPairSerializer.get_token(user)
             refresh_token = str(token)
