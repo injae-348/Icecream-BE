@@ -5,6 +5,8 @@ from .models import BankAccount, Expenditure, Income
 from .serializers import BankAccountSerializer, ExpenditureSerializer, IncomeSerializer
 from .mixins import MarkIsCheckMixin
 
+# filter_backends, search_fields, ordering_fields 를 사용하여 내장된 필터를 활성화 할 수 있다.
+# 커스텀 필터 또한 생성 가능
 class BankAccountViewSet(viewsets.ModelViewSet):
 
     queryset = BankAccount.objects.all()
